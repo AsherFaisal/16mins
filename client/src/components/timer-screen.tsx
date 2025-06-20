@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Settings, RotateCcw, Play, Pause, SkipForward, Music, Target, BarChart3 } from "lucide-react";
+import { ArrowLeft, RotateCcw, Play, Square } from "lucide-react";
 import { useTimer } from "@/hooks/use-timer";
 
 interface TimerScreenProps {
@@ -20,8 +19,7 @@ export default function TimerScreen({ onBack, onComplete }: TimerScreenProps) {
     formatTime,
     start,
     pause,
-    reset,
-    skip
+    reset
   } = useTimer({
     initialTime: 16 * 60, // 16 minutes in seconds
     onComplete: () => {
@@ -30,12 +28,16 @@ export default function TimerScreen({ onBack, onComplete }: TimerScreenProps) {
     }
   });
 
-  const circumference = 2 * Math.PI * 120; // radius of 120
+  const handleStop = () => {
+    pause();
+  };
+
+  const circumference = 2 * Math.PI * 140; // radius of 140
   const strokeDashoffset = circumference * (1 - progress);
 
   return (
     <div className="h-screen flex flex-col">
-      {/* Header with Settings */}
+      {/* Header */}
       <div className="px-6 pt-12 pb-6">
         <div className="flex items-center justify-between">
           <Button 
@@ -46,44 +48,38 @@ export default function TimerScreen({ onBack, onComplete }: TimerScreenProps) {
           >
             <ArrowLeft className="w-6 h-6" />
           </Button>
-          <h2 className="text-xl font-semibold text-foreground">Focus Timer</h2>
-          <Button 
-            variant="ghost" 
-            size="icon"
-            className="p-2 -mr-2 text-muted-foreground hover:text-foreground"
-          >
-            <Settings className="w-6 h-6" />
-          </Button>
+          <h2 className="text-xl font-semibold text-foreground">16mins Timer</h2>
+          <div className="w-10"></div>
         </div>
       </div>
 
       {/* Timer Container */}
       <div className="flex-1 timer-container flex flex-col justify-center items-center px-6">
         {/* Timer Circle */}
-        <div className="relative mb-12">
+        <div className="relative mb-16">
           {/* Background Ring */}
-          <div className="absolute inset-0 w-72 h-72">
-            <svg className="w-full h-full progress-ring" viewBox="0 0 288 288">
+          <div className="absolute inset-0 w-80 h-80">
+            <svg className="w-full h-full progress-ring" viewBox="0 0 320 320">
               <circle 
-                cx="144" 
-                cy="144" 
-                r="120" 
+                cx="160" 
+                cy="160" 
+                r="140" 
                 stroke="hsl(var(--border))" 
-                strokeWidth="8" 
+                strokeWidth="12" 
                 fill="none"
               />
             </svg>
           </div>
 
           {/* Progress Ring */}
-          <div className="absolute inset-0 w-72 h-72">
-            <svg className="w-full h-full progress-ring" viewBox="0 0 288 288">
+          <div className="absolute inset-0 w-80 h-80">
+            <svg className="w-full h-full progress-ring" viewBox="0 0 320 320">
               <circle
-                cx="144"
-                cy="144"
-                r="120"
+                cx="160"
+                cy="160"
+                r="140"
                 stroke="hsl(var(--primary))"
-                strokeWidth="8"
+                strokeWidth="12"
                 fill="none"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
@@ -95,93 +91,68 @@ export default function TimerScreen({ onBack, onComplete }: TimerScreenProps) {
 
           {/* Pulse Ring (when active) */}
           {isRunning && (
-            <div className="absolute inset-0 w-72 h-72">
+            <div className="absolute inset-0 w-80 h-80">
               <div className="w-full h-full rounded-full border-4 border-primary/30 pulse-ring"></div>
             </div>
           )}
 
           {/* Timer Display */}
-          <div className="w-72 h-72 flex flex-col items-center justify-center">
-            <div className="text-6xl font-bold text-foreground font-mono">
+          <div className="w-80 h-80 flex flex-col items-center justify-center">
+            <div className="text-7xl font-bold text-foreground font-mono mb-4">
               {formatTime(timeLeft)}
             </div>
-            <div className="text-lg text-muted-foreground mt-2">
+            <div className="text-xl text-muted-foreground mb-6">
               {isRunning ? 'Focusing...' : timeLeft === 16 * 60 ? 'Ready to focus' : 'Paused'}
             </div>
-
-            {/* Session Info */}
-            <div className="mt-6 text-center">
+            <div className="text-center">
               <div className="text-sm text-muted-foreground">Session</div>
-              <div className="text-xl font-semibold text-foreground">{sessionCount}</div>
+              <div className="text-2xl font-semibold text-foreground">{sessionCount}</div>
             </div>
           </div>
         </div>
 
-        {/* Timer Controls */}
-        <div className="flex items-center justify-center space-x-6">
-          {/* Reset Button */}
+        {/* Simple Controls */}
+        <div className="flex items-center justify-center space-x-8">
+          {/* Start Button */}
+          {!isRunning && (
+            <Button
+              onClick={start}
+              className="w-24 h-24 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full touch-feedback shadow-lg active:shadow-md transition-all duration-150 text-lg font-medium"
+            >
+              <Play className="w-10 h-10 ml-1" />
+            </Button>
+          )}
+
+          {/* Stop Button */}
+          {isRunning && (
+            <Button
+              onClick={handleStop}
+              className="w-24 h-24 bg-red-500 hover:bg-red-600 text-white rounded-full touch-feedback shadow-lg active:shadow-md transition-all duration-150 text-lg font-medium"
+            >
+              <Square className="w-10 h-10" />
+            </Button>
+          )}
+
+          {/* Restart Button */}
           <Button
-            variant="outline"
-            size="icon"
             onClick={reset}
-            className="w-14 h-14 bg-secondary text-secondary-foreground rounded-full touch-feedback shadow-sm active:shadow-none transition-all duration-150"
+            className="w-20 h-20 bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full touch-feedback shadow-sm active:shadow-none transition-all duration-150"
           >
-            <RotateCcw className="w-6 h-6" />
-          </Button>
-
-          {/* Play/Pause Button */}
-          <Button
-            onClick={isRunning ? pause : start}
-            className="w-20 h-20 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full touch-feedback shadow-lg active:shadow-md transition-all duration-150"
-          >
-            {isRunning ? (
-              <Pause className="w-8 h-8" />
-            ) : (
-              <Play className="w-8 h-8 ml-1" />
-            )}
-          </Button>
-
-          {/* Skip Button */}
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={skip}
-            className="w-14 h-14 bg-secondary text-secondary-foreground rounded-full touch-feedback shadow-sm active:shadow-none transition-all duration-150"
-          >
-            <SkipForward className="w-6 h-6" />
+            <RotateCcw className="w-8 h-8" />
           </Button>
         </div>
-      </div>
 
-      {/* Quick Actions */}
-      <div className="px-6 pb-8">
-        <Card>
-          <CardContent className="p-4">
-            <div className="grid grid-cols-3 gap-4">
-              <Button
-                variant="ghost"
-                className="flex flex-col items-center py-3 px-2 text-muted-foreground hover:text-primary transition-colors touch-feedback rounded-lg h-auto"
-              >
-                <Music className="w-6 h-6 mb-1" />
-                <span className="text-xs">Sounds</span>
-              </Button>
-              <Button
-                variant="ghost"
-                className="flex flex-col items-center py-3 px-2 text-muted-foreground hover:text-primary transition-colors touch-feedback rounded-lg h-auto"
-              >
-                <Target className="w-6 h-6 mb-1" />
-                <span className="text-xs">Goals</span>
-              </Button>
-              <Button
-                variant="ghost"
-                className="flex flex-col items-center py-3 px-2 text-muted-foreground hover:text-primary transition-colors touch-feedback rounded-lg h-auto"
-              >
-                <BarChart3 className="w-6 h-6 mb-1" />
-                <span className="text-xs">Stats</span>
-              </Button>
+        {/* Button Labels */}
+        <div className="flex items-center justify-center space-x-8 mt-4">
+          <div className="text-center">
+            <div className="text-sm text-muted-foreground font-medium">
+              {isRunning ? 'Stop' : 'Start'}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+          <div className="text-center">
+            <div className="text-sm text-muted-foreground font-medium">Restart</div>
+          </div>
+        </div>
       </div>
     </div>
   );

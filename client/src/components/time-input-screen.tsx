@@ -20,6 +20,8 @@ export default function TimeInputScreen({ onComplete, onBack }: TimeInputScreenP
     onComplete();
   };
 
+  const isFormComplete = dailyTime && frequency;
+
   return (
     <div className="h-screen flex flex-col">
       {/* Header */}
@@ -87,9 +89,10 @@ export default function TimeInputScreen({ onComplete, onBack }: TimeInputScreenP
       <div className="px-6 pb-8">
         <Button 
           onClick={handleSave}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-4 px-6 rounded-xl touch-feedback shadow-lg active:shadow-md transition-all duration-150"
+          disabled={!isFormComplete}
+          className="w-full bg-primary hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground text-primary-foreground font-medium py-4 px-6 rounded-xl touch-feedback shadow-lg active:shadow-md transition-all duration-150 disabled:cursor-not-allowed"
         >
-          Continue to Timer
+          {isFormComplete ? 'Next - Start Timer' : 'Select Time & Frequency'}
         </Button>
       </div>
     </div>
