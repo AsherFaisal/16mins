@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Clock, Calendar, CheckCircle } from "lucide-react";
+import { Clock, Calendar, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface OnboardingScreenProps {
   onComplete: () => void;
@@ -42,16 +42,16 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
   };
 
   const handleSwipe = () => {
-    const swipeThreshold = 50;
+    const swipeThreshold = 30; // Reduced threshold for better sensitivity
     const swipeDistance = touchStartX.current - touchEndX.current;
 
     if (Math.abs(swipeDistance) > swipeThreshold) {
       if (swipeDistance > 0 && currentCard < CARDS.length - 1) {
         // Swipe left - next card
-        setCurrentCard(currentCard + 1);
+        setCurrentCard(prev => prev + 1);
       } else if (swipeDistance < 0 && currentCard > 0) {
         // Swipe right - previous card
-        setCurrentCard(currentCard - 1);
+        setCurrentCard(prev => prev - 1);
       }
     }
   };
@@ -119,13 +119,33 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
           })}
         </div>
 
+        {/* Navigation Arrows */}
+        {currentCard > 0 && (
+          <button
+            onClick={() => setCurrentCard(prev => prev - 1)}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-primary/10 hover:bg-primary/20 rounded-full flex items-center justify-center transition-all duration-200"
+          >
+            <ChevronLeft className="w-6 h-6 text-primary" />
+          </button>
+        )}
+        
+        {currentCard < CARDS.length - 1 && (
+          <button
+            onClick={() => setCurrentCard(prev => prev + 1)}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-primary/10 hover:bg-primary/20 rounded-full flex items-center justify-center transition-all duration-200"
+          >
+            <ChevronRight className="w-6 h-6 text-primary" />
+          </button>
+        )}
+
         {/* Card Indicators */}
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {CARDS.map((_, index) => (
-            <div
+            <button
               key={index}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentCard ? 'bg-primary' : 'bg-muted'
+              onClick={() => setCurrentCard(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentCard ? 'bg-primary' : 'bg-muted hover:bg-muted-foreground/50'
               }`}
             />
           ))}
