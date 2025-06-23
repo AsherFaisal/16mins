@@ -1,7 +1,9 @@
+// ... existing imports ...
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, RotateCcw, Play, Square } from "lucide-react";
 import { useTimer } from "@/hooks/use-timer";
+import { storage } from "@/lib/storage";
 
 interface TimerScreenProps {
   onBack: () => void;
@@ -10,7 +12,16 @@ interface TimerScreenProps {
 
 export default function TimerScreen({ onBack, onComplete }: TimerScreenProps) {
   const [sessionCount, setSessionCount] = useState(1);
-  
+
+  // Save session to local storage when timer completes
+  const handleSessionComplete = () => {
+    storage.createSession({
+      duration: 16 * 60, // 16 minutes in seconds
+    });
+    setSessionCount((prev) => prev + 1);
+    onComplete();
+  };
+
   const {
     timeLeft,
     isRunning,
@@ -21,11 +32,8 @@ export default function TimerScreen({ onBack, onComplete }: TimerScreenProps) {
     pause,
     reset
   } = useTimer({
-    initialTime: 16 * 60, // 16 minutes in seconds
-    onComplete: () => {
-      setSessionCount(prev => prev + 1);
-      onComplete();
-    }
+    initialTime: 16 * 60,
+    onComplete: handleSessionComplete,
   });
 
   const handleStop = () => {
