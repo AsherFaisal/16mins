@@ -1,0 +1,6 @@
+<svg width="512" height="512" fill="#6366F1" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#6366F1" rx="86"/>
+  <circle cx="256" cy="256" r="128" fill="none" stroke="white" stroke-width="20"/>
+  <path d="M256 160V256l80 40" stroke="white" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <text x="256" y="360" text-anchor="middle" font-family="sans-serif" font-size="42" font-weight="bold" fill="white">16mins</text>
+</svg>
