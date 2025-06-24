@@ -1,6 +1,6 @@
 {
   "packageId": "localhost_8080.twa",
-  "host": "localhost",
+  "host": "16mins.s3-website-us-east-1.amazonaws.com",
   "name": "16mins - Focus Timer",
   "launcherName": "16mins",
   "display": "fullscreen",
@@ -13,18 +13,18 @@
   "backgroundColor": "#FAFAFA",
   "enableNotifications": true,
   "startUrl": "/",
-  "iconUrl": "http://localhost:8080/icon-512.svg",
-  "maskableIconUrl": "http://localhost:8080/icon-512.svg",
+  "iconUrl": "https://16mins.s3.us-east-1.amazonaws.com/icon-512.svg",
+  "maskableIconUrl": "https://16mins.s3.us-east-1.amazonaws.com/icon-512.svg",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "/home/asher/Documents/Code/Projects/16mins/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1",
-  "appVersionCode": 1,
+  "appVersionName": "2",
+  "appVersionCode": 2,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
-  "webManifestUrl": "http://localhost:8080/manifest.json",
+  "webManifestUrl": "https://16mins.s3.us-east-1.amazonaws.com/manifest.json",
   "fallbackType": "customtabs",
   "features": {},
   "alphaDependencies": {
@@ -33,7 +33,7 @@
   "enableSiteSettingsShortcut": true,
   "isChromeOSOnly": false,
   "isMetaQuest": false,
-  "fullScopeUrl": "http://localhost:8080/",
+  "fullScopeUrl": "https://16mins.s3.us-east-1.amazonaws.com/",
   "minSdkVersion": 21,
   "orientation": "portrait",
   "fingerprints": [],
@@ -42,5 +42,5 @@
   "protocolHandlers": [],
   "fileHandlers": [],
   "launchHandlerClientMode": "",
-  "appVersion": "1"
+  "appVersion": "2"
 }

@@ -1,5 +1,52 @@
-node_modules
-dist
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Android
+/local.properties
+*.iml
+.idea/
+*.apk
+*.apks
+*.aab
+*.idsig
+*.keystore
+*.jks
+*.dex
+*.class
+*.log
+*.hprof
+*.cxx/
+captures/
+output.json
+*.db
+*.db-journal
+*.lock
+*.so
+*.zip
+*.tar.gz
+*.orig
+*.rej
+*.swp
+*.swo
+*.DS_Store
+
+# Android Studio
+/.idea
+*.iws
+*.ipr
+*.iml
+*.hprof
+
+# Bubblewrap (TWA)
+node_modules/
+.web-signing-key
+bubblewrap-config.json
+twa-manifest.json.bak
+
+# OS generated
 .DS_Store
 server/public
 vite.config.ts.*
