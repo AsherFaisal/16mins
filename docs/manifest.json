@@ -1,0 +1,29 @@
+{
+  "name": "16mins - Focus Timer",
+  "short_name": "16mins",
+  "description": "A mobile-first focus timer app designed to help you maintain peak concentration with 16-minute focused work sessions.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#6366F1",
+  "background_color": "#FAFAFA",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzc1IiBoZWlnaHQ9IjgxMiIgZmlsbD0iI0ZBRkFGQSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzc1IiBoZWlnaHQ9IjgxMiIgZmlsbD0iI0ZBRkFGQSIvPjx0ZXh0IHg9IjE4Ny41IiB5PSI0MDYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSIjNjM2NkYxIj4xNm1pbnMgVGltZXI8L3RleHQ+PC9zdmc+",
+      "sizes": "375x812",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "prefer_related_applications": false
+}

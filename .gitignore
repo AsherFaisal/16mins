@@ -1,6 +1,6 @@
 # Gradle
 .gradle/
-build/
+build/*
 !gradle/wrapper/gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.properties
 
@@ -51,3 +51,4 @@ twa-manifest.json.bak
 server/public
 vite.config.ts.*
 *.tar.gz
+aws/
