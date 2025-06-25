@@ -1,8 +1,8 @@
-const CACHE_NAME = '16mins-v3';
+const CACHE_NAME = '16mins-v4';
 const urlsToCache = [
   '/16mins/',
   '/16mins/index.html',
-  '/16mins/assets/index-CoPxxsmA.js',
+  '/16mins/assets/index-DKvXJXuJ.js',
   '/16mins/assets/index-m623uHXE.css',
   '/16mins/manifest.json',
   '/16mins/icon-512.svg',
@@ -11,32 +11,13 @@ const urlsToCache = [
 
 // Install event - cache resources
 self.addEventListener('install', event => {
-  console.log('SW: Installing service worker, cache name:', CACHE_NAME);
-  console.log('SW: URLs to cache:', urlsToCache);
-  
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('SW: Cache opened successfully');
         return cache.addAll(urlsToCache);
       })
-      .then(() => {
-        console.log('SW: All URLs cached successfully');
-      })
       .catch(error => {
-        console.error('SW: Cache install failed:', error);
-        // Let's try to cache each URL individually to see which ones fail
-        return caches.open(CACHE_NAME).then(cache => {
-          return Promise.allSettled(
-            urlsToCache.map(url => {
-              return cache.add(url).then(() => {
-                console.log('SW: Successfully cached:', url);
-              }).catch(err => {
-                console.error('SW: Failed to cache:', url, err);
-              });
-            })
-          );
-        });
+        console.log('Cache install failed:', error);
       })
   );
   self.skipWaiting();
@@ -44,33 +25,17 @@ self.addEventListener('install', event => {
 
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', event => {
-  console.log('SW: Fetch request for:', event.request.url, 'destination:', event.request.destination);
-  
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        if (response) {
-          console.log('SW: Serving from cache:', event.request.url);
-          return response;
-        } else {
-          console.log('SW: Not in cache, fetching from network:', event.request.url);
-          return fetch(event.request).then(networkResponse => {
-            console.log('SW: Network fetch successful for:', event.request.url, 'status:', networkResponse.status);
-            return networkResponse;
-          }).catch(err => {
-            console.error('SW: Network fetch failed for:', event.request.url, err);
-            throw err;
-          });
-        }
+        // Return cached version or fetch from network
+        return response || fetch(event.request);
       })
-      .catch((error) => {
-        console.error('SW: Fetch failed for:', event.request.url, error);
+      .catch(() => {
         // Fallback for offline functionality
         if (event.request.destination === 'document') {
-          console.log('SW: Trying fallback to /16mins/ for document request');
           return caches.match('/16mins/');
         }
-        throw error;
       })
   );
 });

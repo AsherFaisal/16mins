@@ -1,8 +1,8 @@
-const CACHE_NAME = '16mins-v2';
+const CACHE_NAME = '16mins-v4';
 const urlsToCache = [
   '/16mins/',
   '/16mins/index.html',
-  '/16mins/assets/index-CoPxxsmA.js',
+  '/16mins/assets/index-DKvXJXuJ.js',
   '/16mins/assets/index-m623uHXE.css',
   '/16mins/manifest.json',
   '/16mins/icon-512.svg',

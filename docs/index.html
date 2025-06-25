@@ -32,17 +32,17 @@
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/16mins/assets/index-CoPxxsmA.js"></script>
+    <script type="module" crossorigin src="/16mins/assets/index-DKvXJXuJ.js"></script>
     <link rel="stylesheet" crossorigin href="/16mins/assets/index-m623uHXE.css">
   </head>
   <body>
     <div id="root"></div>
     <script src="/16mins/state-debug.js"></script>
     <script>
-      console.log('DEBUG: Page loaded with service worker');
+      console.log('DEBUG: Page loaded with service worker and routing fix');
       console.log('DEBUG: Root element:', document.getElementById('root'));
       console.log('DEBUG: Current URL:', window.location.href);
-      console.log('DEBUG: Base URL:', window.location.origin);
+      console.log('DEBUG: Pathname:', window.location.pathname);
       
       // Monitor for any errors
       window.addEventListener('error', (event) => {
@@ -60,8 +60,8 @@
       setTimeout(() => {
         console.log('DEBUG: Checking React after 3 seconds...');
         const root = document.getElementById('root');
+        console.log('DEBUG: Root element content length:', root?.innerHTML?.length || 0);
         console.log('DEBUG: Root element content:', root?.innerHTML || 'EMPTY');
-        console.log('DEBUG: Body content length:', document.body.innerHTML.length);
       }, 3000);
     </script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
