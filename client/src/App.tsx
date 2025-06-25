@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     // Register service worker for PWA functionality
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js')
+      navigator.serviceWorker.register('/16mins/sw.js')
         .then((registration) => {
           console.log('SW registered: ', registration);
         })
