@@ -166,6 +166,7 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { fileURLToPath } from "url";
 var __dirname = path.dirname(fileURLToPath(import.meta.url));
 var vite_config_default = defineConfig({
+  base: "/16mins/",
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -184,7 +185,7 @@ var vite_config_default = defineConfig({
   },
   root: path.resolve(__dirname, "client"),
   build: {
-    outDir: path.resolve(__dirname, "dist/public"),
+    outDir: "../docs",
     emptyOutDir: true
   },
   server: {
