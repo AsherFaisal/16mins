@@ -1,11 +1,11 @@
-const CACHE_NAME = '16mins-v1';
+const CACHE_NAME = '16mins-v2';
 const urlsToCache = [
-  '/16mins/docs',
-  '/16mins/docs/index.html',
-  '/16mins/docs/assets/index-CoPxxsmA.js',
-  '/16mins/docs/assets/index-m623uHXE.css',
-  '/16mins/docs/manifest.json',
-  '/16mins/docs/icon-512.svg',
+  '/16mins/',
+  '/16mins/index.html',
+  '/16mins/assets/index-CoPxxsmA.js',
+  '/16mins/assets/index-m623uHXE.css',
+  '/16mins/manifest.json',
+  '/16mins/icon-512.svg',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
 ];
 
