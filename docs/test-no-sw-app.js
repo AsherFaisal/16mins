@@ -5,10 +5,23 @@ console.log('TEST: Loading no-SW app override');
 
 // Wait for React to be available
 const waitForReact = () => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    let attempts = 0;
+    const maxAttempts = 50; // 5 seconds
+    
     const checkReact = () => {
+      attempts++;
+      console.log(`TEST: Checking for React, attempt ${attempts}`);
+      console.log('TEST: window.React:', !!window.React);
+      console.log('TEST: window.ReactDOM:', !!window.ReactDOM);
+      console.log('TEST: Available globals:', Object.keys(window).filter(k => k.toLowerCase().includes('react')));
+      
       if (window.React && window.ReactDOM) {
+        console.log('TEST: React found!');
         resolve();
+      } else if (attempts >= maxAttempts) {
+        console.log('TEST: React not found after max attempts, trying alternative approach');
+        reject(new Error('React not available globally'));
       } else {
         setTimeout(checkReact, 100);
       }

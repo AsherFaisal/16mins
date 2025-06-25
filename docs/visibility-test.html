@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1" />
-    <title>16mins - Focus Timer App</title>
+    <title>16mins - Visibility Test</title>
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#6366F1">
@@ -37,34 +37,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="/16mins/state-debug.js"></script>
-    <script>
-      console.log('DEBUG: Page loaded with service worker');
-      console.log('DEBUG: Root element:', document.getElementById('root'));
-      console.log('DEBUG: Current URL:', window.location.href);
-      console.log('DEBUG: Base URL:', window.location.origin);
-      
-      // Monitor for any errors
-      window.addEventListener('error', (event) => {
-        console.error('DEBUG: Global error:', event.error);
-        console.error('DEBUG: Error message:', event.message);
-        console.error('DEBUG: Error filename:', event.filename);
-        console.error('DEBUG: Error line:', event.lineno);
-      });
-
-      window.addEventListener('unhandledrejection', (event) => {
-        console.error('DEBUG: Unhandled promise rejection:', event.reason);
-      });
-      
-      // Check React mounting after a delay
-      setTimeout(() => {
-        console.log('DEBUG: Checking React after 3 seconds...');
-        const root = document.getElementById('root');
-        console.log('DEBUG: Root element content:', root?.innerHTML || 'EMPTY');
-        console.log('DEBUG: Body content length:', document.body.innerHTML.length);
-      }, 3000);
-    </script>
-    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
-    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+    <script src="/16mins/visibility-test.js"></script>
   </body>
 </html>
