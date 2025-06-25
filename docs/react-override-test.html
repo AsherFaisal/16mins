@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1" />
+    <title>16mins - React Override Test</title>
+    
+    <!-- Load the CSS -->
+    <link rel="stylesheet" crossorigin href="/16mins/assets/index-m623uHXE.css">
+    
+    <!-- Load the main JS bundle -->
+    <script type="module" crossorigin src="/16mins/assets/index-CoPxxsmA.js"></script>
+  </head>
+  <body>
+    <div id="root">Loading...</div>
+    
+    <!-- Load our override script after a delay to let the main app try to load first -->
+    <script>
+      console.log('OVERRIDE: Page loaded, waiting 2 seconds before override');
+      setTimeout(() => {
+        console.log('OVERRIDE: Loading override script');
+        const script = document.createElement('script');
+        script.src = '/16mins/test-no-sw-app.js';
+        document.head.appendChild(script);
+      }, 2000);
+    </script>
+  </body>
+</html>

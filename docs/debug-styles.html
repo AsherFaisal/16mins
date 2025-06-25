@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Debug Test</title>
+    <link rel="stylesheet" crossorigin href="/16mins/assets/index-m623uHXE.css">
+    <style>
+        .debug-box {
+            border: 2px solid red;
+            padding: 10px;
+            margin: 10px;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Style Debug Test</h1>
+    
+    <div class="debug-box">
+        <h2>Basic HTML Styling (should be visible)</h2>
+        <p>This uses basic HTML styling and should always be visible.</p>
+    </div>
+    
+    <div class="debug-box">
+        <h2>Tailwind Classes Test</h2>
+        <div class="text-foreground bg-card p-4 rounded-lg border">
+            <p class="text-muted-foreground">This uses Tailwind classes like your app</p>
+            <button class="bg-primary text-primary-foreground px-4 py-2 rounded">Button</button>
+        </div>
+    </div>
+    
+    <div class="debug-box">
+        <h2>App Structure Test</h2>
+        <div class="min-h-screen max-w-md mx-auto bg-card relative overflow-hidden">
+            <div class="px-6 pt-12 pb-6">
+                <h1 class="text-3xl font-bold text-foreground text-center">16mins</h1>
+                <p class="text-muted-foreground text-center mt-2">Focus in 16-minute sessions</p>
+            </div>
+            <div class="p-8">
+                <p class="text-foreground">This mimics your onboarding screen structure</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        console.log('DEBUG: Style test loaded');
+        
+        // Check computed styles
+        setTimeout(() => {
+            const testElement = document.querySelector('.text-foreground');
+            if (testElement) {
+                const styles = window.getComputedStyle(testElement);
+                console.log('DEBUG: text-foreground color:', styles.color);
+                console.log('DEBUG: text-foreground computed styles:', {
+                    color: styles.color,
+                    fontSize: styles.fontSize,
+                    fontWeight: styles.fontWeight
+                });
+            }
+            
+            const cardElement = document.querySelector('.bg-card');
+            if (cardElement) {
+                const styles = window.getComputedStyle(cardElement);
+                console.log('DEBUG: bg-card background:', styles.backgroundColor);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
