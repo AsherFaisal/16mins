@@ -1,9 +1,11 @@
 const CACHE_NAME = '16mins-v1';
 const urlsToCache = [
-  '/',
-  '/src/main.tsx',
-  '/src/index.css',
-  '/manifest.json',
+  '/16mins/',
+  '/16mins/index.html',
+  '/16mins/assets/index-CoPxxsmA.js',
+  '/16mins/assets/index-m623uHXE.css',
+  '/16mins/manifest.json',
+  '/16mins/icon-512.svg',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
 ];
 
@@ -32,7 +34,7 @@ self.addEventListener('fetch', event => {
       .catch(() => {
         // Fallback for offline functionality
         if (event.request.destination === 'document') {
-          return caches.match('/');
+          return caches.match('/16mins/');
         }
       })
   );
@@ -60,8 +62,8 @@ self.addEventListener('sync', event => {
     event.waitUntil(
       self.registration.showNotification('16mins Focus Complete!', {
         body: 'Great job! You completed a 16-minute focus session.',
-        icon: '/manifest-icon-192.png',
-        badge: '/manifest-icon-192.png',
+        icon: '/16mins/icon-512.svg',
+        badge: '/16mins/icon-512.svg',
         vibrate: [200, 100, 200],
         tag: 'timer-complete'
       })
@@ -78,7 +80,7 @@ self.addEventListener('notificationclick', event => {
       if (clientList.length > 0) {
         return clientList[0].focus();
       }
-      return clients.openWindow('/');
+      return clients.openWindow('/16mins/');
     })
   );
 });
